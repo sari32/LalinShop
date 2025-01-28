@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const minimalSchema = mongoose.Schema({
     name: String,
     price: Number,
-    count: { type: Number, default: 1 }
+    count: { type: Number, default: 1 },
+    _id: String
 })
 
 const orderSchema = mongoose.Schema({

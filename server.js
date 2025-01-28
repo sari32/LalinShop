@@ -12,9 +12,9 @@ const app=express();
 
 app.use(express.json());
 
-app.use("/product", productRouter);
-app.use("/user", userRouter);
-app.use("/order", orderRouter);
+app.use("/api/product", productRouter);
+app.use("/api/user", userRouter);
+app.use("/api/order", orderRouter);
 
 let port=process.env.PORT;
 app.listen(port, () => {
