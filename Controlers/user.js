@@ -58,7 +58,7 @@ export const updateById = async (req, res) => {
     }
     catch (err) {
         console.log("err: " + err.message);
-        res.status(400).json({ title: "error! cannot update user by id", message: "somthing wrong" });
+        res.status(400).json({ title: "error cannot update user by id", message: "somthing wrong" });
     }
 
 }

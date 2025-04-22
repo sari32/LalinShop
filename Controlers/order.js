@@ -40,19 +40,19 @@ export const addOrder = async (req, res) => {
 
             return { valid: true, product };
         }));
-       // החזרת שגיאה אם קיימת
+        // החזרת שגיאה אם קיימת
         const invalidProduct = productChecks.find(check => !check.valid);
         if (invalidProduct) {
             return res.status(400).json({ title: "Invalid product data", message: invalidProduct.error });
         }
 
         // חישוב סכום כולל
-        let totalSum=0
+        let totalSum = 0
         products.forEach(prod => {
-            totalSum+=(prod.price)*(prod.count||1)
+            totalSum += (prod.price) * (prod.count || 1)
         });
         let newOrder = new orderModel(req.body);
-        newOrder.totalSum=totalSum+(newOrder.priceSending||30);
+        newOrder.totalSum = totalSum + (newOrder.priceSending || 30);
         let data = await newOrder.save();
         res.json(data);
 

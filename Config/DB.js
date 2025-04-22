@@ -5,7 +5,7 @@ export const connectToDB=async () =>{
         console.log("mongo db connected");
     }
     catch(err){
-        console.log("cannot DB "+err);
+        console.log("cannot DB: "+err);
         process.exit(1);
     }
 }
