@@ -15,16 +15,50 @@ export const getById = async (req, res) => {
     }
 }
 
-export const getAllProducts = async (req, res) => {
+// export const getAllProducts = async (req, res) => {
+//     try {
+//         let data = await productModel.find();
+//         res.json(data);
+//     }
+//     catch (err) {
+//         console.log(err.message);
+//         res.status(400).json({ title: "error cannot get all products", message: "somthing wrong" });
+//     }
+// }
+
+export const getAllProducts = async(req, res) => {
+    let lim = req.query.limit || 10;
+    let page = req.query.page || 1;
     try {
-        let data = await productModel.find();
+        let data = await productModel.find().skip((page - 1) *
+            lim).limit(lim);
         res.json(data);
     }
     catch (err) {
         console.log(err.message);
-        res.status(400).json({ title: "error cannot get all products", message: "somthing wrong" });
+        res.status(400).json({
+            title: "error cannot get all", message: "somthing wrong"
+        });
     }
 }
+
+export const getTotalCount = async(req, res) => {
+    let lim = req.query.limit || 10;
+    try {
+        let data = await productModel.countDocuments();
+        res.json({
+            totalCount: data,
+            pages: Math.ceil(data / lim),
+            limit: lim
+        })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400).json({ title: "cannot get all",
+        massage: err.massage
+    })
+}
+        }
 
 export const deleteById = async (req, res) => {
     let { id } = req.params;
@@ -42,7 +76,7 @@ export const deleteById = async (req, res) => {
 
 export const updateById = async (req, res) => {
     let { id } = req.params;
-    if (req.body.name && req.body.name.lenght < 2)   //לא עובד
+    if (req.body.name && req.body.name.lenght < 2) 
         return res.status(404).json({ title: "wrong name", message: "wrong data" });
     try {
         let data = await productModel.findByIdAndUpdate(id, req.body, { new: true });

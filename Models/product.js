@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const productSchema = mongoose.Schema({
     name: String,
     descrabtion: String,
-    productionDate: { type: Date, default: new Date() },
+    productionDate: { type: Date, default: Date.now },
     imgUrl: String,
     price: Number,
     categories: [String]

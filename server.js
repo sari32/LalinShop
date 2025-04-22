@@ -1,5 +1,6 @@
 import express from "express";
 import dotnev from "dotenv";
+import cors from "cors";
 
 import { connectToDB } from "./Config/DB.js";
 import productRouter from "./Router/Product.js";
@@ -9,6 +10,8 @@ import orderRouter from "./Router/order.js";
 dotnev.config();
 connectToDB();
 const app=express();
+
+app.use(cors());
 
 app.use(express.json());
 
