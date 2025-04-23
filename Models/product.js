@@ -5,6 +5,7 @@ const productSchema = mongoose.Schema({
     descrabtion: String,
     productionDate: { type: Date, default: Date.now },
     imgUrl: String,
+    imgUrlHover:String,
     price: Number,
     categories: [String]
 })

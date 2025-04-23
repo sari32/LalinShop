@@ -11,7 +11,7 @@ export function check(req, res, next) {
     }
     catch (err) {
         console.log(err);
-        return res.status(401).json({ title: "unauthorized", message: "first log in! " });
+        return res.status(401).json({ title: "unauthorized", message: "first log in!" });
     }
 }
 
